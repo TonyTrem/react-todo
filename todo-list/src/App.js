@@ -3,11 +3,17 @@ import React, { useState } from 'react';
 function TodoList() {
   const [todos, setTodos] = useState([]);
   const [input, setInput] = useState('');
+  const [priority, setPriority] = useState('');
 
   const addTodo = () => {
-    if (input.trim() !== '') {
-      setTodos([...todos, input]);
+    if (input.trim() !== '' && priority.trim() !== '') {
+      const newTodo = {
+        task: input,
+        priority: priority
+      };
+      setTodos([...todos, newTodo]);
       setInput('');
+      setPriority('');
     }
   };
 
@@ -23,12 +29,19 @@ function TodoList() {
         type="text"
         value={input}
         onChange={(e) => setInput(e.target.value)}
+        placeholder="Task"
+      />
+      <input
+        type="text"
+        value={priority}
+        onChange={(e) => setPriority(e.target.value)}
+        placeholder="Priority"
       />
       <button onClick={addTodo}>Add</button>
       <ul>
         {todos.map((todo, index) => (
           <li key={index}>
-            {todo}
+            Task: {todo.task} - Priority: {todo.priority}
             <button onClick={() => deleteTodo(index)}>Delete</button>
           </li>
         ))}
