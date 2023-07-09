@@ -1,2 +1,2 @@
 # react-todo
-Simple todo react app project
+Simple todo react app project.
